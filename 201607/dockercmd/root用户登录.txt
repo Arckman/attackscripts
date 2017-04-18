@@ -1,0 +1,19 @@
+#测试远程docker连接
+docker -H ip:port version
+
+#查看远程images，如果没有centos的image，远程加载一个
+docker -H ip:port load -i centos.tar
+
+#在自己电脑上生成公钥
+ssh-keygen -t rsa -p ''
+#查看公钥
+cat ~/.ssh/id_rsa.pub
+
+#远程启动image，并启动bash
+docker -H ip:port run -it -v /root/.ssh/:/mnt centos:6 /bin/bash
+#写入公钥
+echo [公钥内容] > /mnt/authorized_keys
+
+
+#然后就可以通过ssh连接，可参考下面文章：
+http://www.cnblogs.com/hanyifeng/p/5526799.html
