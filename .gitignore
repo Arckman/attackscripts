@@ -1,5 +1,8 @@
 *.log
 targets.txt
+*.txt
+*.docx
+*.xlsx
 
 
 #################
