@@ -23,6 +23,9 @@ def fastExpMod(b, e, m):
     return result
 
 def computeD(fn, e):
+    '''
+    compute d from fn,e
+    '''
     (x, y, r) = extendedGCD(fn, e)
     #y maybe < 0, so convert it
     if y < 0:
