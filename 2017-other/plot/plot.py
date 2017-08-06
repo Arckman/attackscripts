@@ -13,3 +13,18 @@ for line in open(r'ce2.txt').xreadlines():
     i+=1
 
 im.show()
+
+'''
+import Image
+import re
+x = 887
+y = 111
+image = Image.new("RGB",(x,y))
+f = open('ce.txt')
+for i in range(0,x):
+    for j in range(0,y):
+        l = f.readline()
+        r = l.split(",")
+        image.putpixel((i,j),(int(r[0]),int(r[1]),int(r[2])))
+image.save('image.jpg')
+'''
