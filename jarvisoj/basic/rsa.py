@@ -3,7 +3,7 @@ def fastExpMod(b, e, m):
     """
     key function for RSA decryption
     @param b:cipher
-    @param e:e
+    @param e:e/d
     @param m:N
     e = e0*(2^0) + e1*(2^1) + e2*(2^2) + ... + en * (2^n)
 
