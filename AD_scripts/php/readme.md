@@ -1,0 +1,2 @@
+- host_config:memory stay shell,write a simple shell to his parent folder.
+- qpxm:walk down from current path,append a simple shell to every php file.
