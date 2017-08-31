@@ -20,7 +20,7 @@ elif mode=='product'
 	loglevel=logging.INFO
 	log_format='%(asctime)s %(message)s'
 
-logging.basicConfig(level=loglevel,format=log_format,datefmt='%a, %d %b %Y %H:%M:%S',)
+logging.basicConfig(level=loglevel,format=log_format,datefmt='%a, %d %b %Y %H:%M:%S')
 
 with open(input_Filename_target,'r') as input_File_target:
 	target = input_File_target.readlines()
