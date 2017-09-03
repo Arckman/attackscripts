@@ -1,1 +1,2 @@
 collecting and making some  scripts for attack and defence competition.
+generator.py collect contents of getFlag/client.py,php/*.php ,and write to general.py.We can only use only general.py to extract all these files.

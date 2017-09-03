@@ -5,6 +5,7 @@ targets.txt
 *.xlsx
 .vscode
 .vscode/*
+AD_scripts/general.py
 
 #################
 ## Eclipse
