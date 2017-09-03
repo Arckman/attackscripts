@@ -10,7 +10,16 @@ cmd=r'whoami'#cmd to get flag
 port=55168
 interval=30 #wake up interval(seconds)
 
-logging.basicConfig(level=logging.DEBUG,format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',datefmt='%a, %d %b %Y %H:%M:%S')
+mode='development'
+if mode=='development':
+    log_format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s'
+    l=logging.DEBUG
+elif mode=='product':
+    log_format='%(asctime)s %(message)s'
+    l=logging.INFO
+
+
+logging.basicConfig(level=l,format=log_format,datefmt='%a, %d %b %Y %H:%M:%S')
 
 def set_proc_name(newname):
     from ctypes import cdll, byref, create_string_buffer
