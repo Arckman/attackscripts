@@ -41,6 +41,9 @@ if __name__=='__main__':
     while True:
         try:
             subprocess.call(flag_shell,shell=True)
+        except:
+            logging.debug(traceback.format_exc())
+        try:
             s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
             address=('0.0.0.0',port)
             s.bind(address)
