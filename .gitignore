@@ -3,6 +3,7 @@ targets.txt
 *.txt
 *.docx
 *.xlsx
+*.out
 .vscode
 .vscode/*
 AD_scripts/general.py
