@@ -7,6 +7,9 @@ targets.txt
 .vscode
 .vscode/*
 AD_scripts/general.py
+AD_scripts/虎啸蓝队防御脚本/dist/backup/
+
+
 
 #################
 ## Eclipse
